@@ -2,7 +2,7 @@ version: 0.2
 env:
     variables:
         CACHE_CONTROL: "86400"
-        S3_BUCKET: "arn:aws:s3:::surajbucket1998"
+        S3_BUCKET: "arn:aws:s3:::suraj1998bucket"
         BUILD_FOLDER: "dist"
 phases:
   install:
