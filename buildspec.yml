@@ -15,10 +15,10 @@ phases:
   build:
     commands:
         - echo Build started 
-        - ng build --prod
+        - ng build
  
 artifacts:
     files:
-        - '**/*'
+        - 'dist'
     base-directory: 'dist'
     discard-paths: yes
