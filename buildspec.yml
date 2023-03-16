@@ -1,3 +1,29 @@
+# version: 0.2
+# env:
+#     variables:
+#         CACHE_CONTROL: "86400"
+#         S3_BUCKET: "arn:aws:s3:::suraj1998bucket"
+#         BUILD_FOLDER: "dist"
+# phases:
+#   install:
+#     runtime-versions:
+#         nodejs: 16
+#     commands:
+#         - echo Installing source NPM dependencies...
+#         - npm install
+#         - npm install -g @angular/cli
+#   build:
+#     commands:
+#         - echo Build started 
+#         - ng build
+    
+   
+# artifacts:
+#     files:
+#         - '**/*'
+#     base-directory: 'dist'
+#     discard-paths: yes
+
 version: 0.2
 env:
     variables:
@@ -15,19 +41,14 @@ phases:
   build:
     commands:
         - echo Build started 
-        - ng build
-    
-    post_build:
+        - npm run build:ssr
+  post_build:
     commands:
         - aws s3 cp s3://suraj1998bucket/Procfile ./dist
+        - aws s3 cp s3://suraj1998bucket/.npmrc ./dist
         - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
-        # - aws s3 rm s3://devemr.growthemr.com --recursive
-        - echo S3 bucket is cleared.
-        # - aws cloudfront create-invalidation --distribution-id=E26GLI30EJTNBB --paths '/*'
-
-
+ 
 artifacts:
     files:
         - '**/*'
     base-directory: 'dist'
-    discard-paths: yes
