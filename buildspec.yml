@@ -16,7 +16,16 @@ phases:
     commands:
         - echo Build started 
         - ng build
- 
+    
+    post_build:
+    commands:
+        - aws s3 cp s3://suraj1998bucket/Procfile ./dist
+        - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
+        # - aws s3 rm s3://devemr.growthemr.com --recursive
+        - echo S3 bucket is cleared.
+        # - aws cloudfront create-invalidation --distribution-id=E26GLI30EJTNBB --paths '/*'
+
+
 artifacts:
     files:
         - '**/*'
