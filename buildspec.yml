@@ -44,8 +44,8 @@ phases:
         - npm run build:ssr
   post_build:
     commands:
-        - aws s3 cp s3://suraj1998bucket/Procfile ./dist
-        - aws s3 cp s3://suraj1998bucket/.npmrc ./dist
+        - aws s3 cp s3://suraj1998bucket/Procfile .
+        - aws s3 cp s3://suraj1998bucket/.npmrc .
         - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
  
 artifacts:
